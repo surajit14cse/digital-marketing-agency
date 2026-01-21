@@ -1,0 +1,256 @@
+/* =========================================
+   IMPORTS & CONFIGURATION
+   ========================================= */
+// Import custom variables first to override Bootstrap defaults
+@import "variables";
+// Import Bootstrap source SCSS
+@import "bootstrap/scss/bootstrap";
+// Import Bootstrap Icons
+@import "bootstrap-icons/font/bootstrap-icons.css";
+// Import Inter Font from Google Fonts for modern typography
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* =========================================
+   GLOBAL STYLES
+   ========================================= */
+body {
+    background-color: #ffffff; // Pure White - Cleaner look
+    color: $body-color;        // Uses variable from _variables.scss
+    font-family: $font-family-base;
+    -webkit-font-smoothing: antialiased; // Smoother font rendering on Mac/iOS
+}
+
+/* =========================================
+   UTILITY CLASSES
+   ========================================= */
+// Letter spacing utilities for uppercase headings
+.ls-1 { letter-spacing: 1px; }
+.ls-2 { letter-spacing: 2px; }
+
+// Max-width utility for centering content
+.mw-800 { max-width: 800px; }
+
+// Minimum height utility for Hero sections
+.min-vh-75 { min-height: 75vh; }
+
+// Cursor utility
+.cursor-pointer { cursor: pointer; }
+
+// Scroll margin for fixed navbar compensation
+.scroll-mt { scroll-margin-top: 100px; }
+
+/* =========================================
+   BACKGROUND STYLES
+   ========================================= */
+// Custom gradient background using the primary indigo color
+.bg-gradient-primary {
+    background: linear-gradient(135deg, $primary 0%, #818cf8 100%); // Indigo to Soft Indigo
+}
+
+// Alternative Light Background for Sections
+.bg-light-alt {
+    background-color: #f1f5f9; // Slate 100 - Stronger contrast against white
+}
+
+/* =========================================
+   HOVER EFFECTS & ANIMATIONS
+   ========================================= */
+// Force white text color on hover (useful for links in dark footers)
+.hover-white:hover {
+    color: white !important;
+}
+
+// Add shadow on hover without movement
+.hover-shadow {
+    transition: box-shadow 0.3s ease;
+    &:hover {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    }
+}
+
+// Lift element and add shadow on hover (Cards)
+.hover-up {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    }
+}
+
+// Slight scale up effect
+.transform-hover {
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: scale(1.02);
+    }
+}
+
+// Slow scale transition for images
+.scale-hover {
+    transition: transform 0.5s ease;
+}
+
+// Trigger scale effect on child when parent is hovered
+.group-hover:hover .scale-hover {
+    transform: scale(1.1);
+}
+
+// Animated icon link (arrow moves right on hover)
+.icon-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    i {
+        transition: transform 0.3s ease;
+    }
+    
+    &:hover i {
+        transform: translateX(5px);
+    }
+}
+
+// Grayscale filter for partner logos, color on hover
+.grayscale-logos {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+    
+    &:hover {
+        filter: grayscale(0%);
+    }
+}
+
+/* =========================================
+   ANIMATIONS & KEYFRAMES
+   ========================================= */
+
+// 1. Entrance Animation: Fade In Up
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.animate-fade-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0; // Start hidden to prevent flash
+}
+
+// 2. Continuous Animation: Floating Effect
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); } // Float up
+    100% { transform: translateY(0px); }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+// 3. Ambient Animation: Morphing Blob
+@keyframes morph {
+    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+.blob-shape {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: linear-gradient(180deg, rgba($primary, 0.15) 0%, rgba($info, 0.1) 100%);
+    animation: morph 15s ease-in-out infinite;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(60px); // Soft, ambient glow
+}
+
+/* =========================================
+   SERVICE CARD STYLES
+   ========================================= */
+.service-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 4px solid transparent; // Hidden bottom border by default
+
+    .service-icon {
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1rem; // Rounded square
+        background-color: rgba($primary, 0.1);
+        color: $primary;
+        transition: all 0.4s ease;
+        font-size: 2rem;
+    }
+
+    .read-more-link {
+        font-weight: 600;
+        text-decoration: none;
+        color: $primary;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.3s ease;
+        
+        i { transition: transform 0.3s ease; }
+    }
+
+    // Hover State
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
+        border-bottom-color: $primary; // Reveal colored bottom border
+
+        .service-icon {
+            background-color: $primary;
+            color: white;
+            transform: scale(1.1) rotate(3deg); // Subtle pop and tilt
+            box-shadow: 0 10px 20px rgba($primary, 0.3);
+        }
+
+        .read-more-link {
+            gap: 10px; // Expand gap
+            i { transform: translateX(5px); }
+        }
+    }
+}
+
+/* =========================================
+   SECTION SPECIFIC STYLES
+   ========================================= */
+.hero-section {
+    background-color: #f8f9fa;
+}
+
+/* =========================================
+   FORM CUSTOMIZATION
+   ========================================= */
+// Custom placeholder color
+.placeholder-gray::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+// Remove default browser focus outline
+.focus-none:focus {
+    box-shadow: none;
+    border-color: $secondary;
+}
+
+/* =========================================
+   SPACING HELPERS
+   ========================================= */
+// Extra large padding utility
+.py-6 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}

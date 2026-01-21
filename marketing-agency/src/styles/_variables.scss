@@ -1,0 +1,24 @@
+// Brand Colors
+$primary: #6366f1; // Modern Indigo - Vibrant & Creative
+$secondary: #0f172a; // Dark Slate - Professional & Strong
+$info: #0ea5e9; // Sky Blue
+$success: #10b981; // Emerald
+$warning: #f59e0b; // Amber
+$danger: #ef4444; // Red
+
+// Typography
+$font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$body-color: #334155; // Slate 700 - Softer text
+$headings-color: #1e293b; // Slate 800 - Sharp headings
+
+// Enable negative margins
+$enable-negative-margins: true;
+
+// Navbar overrides
+$navbar-light-brand-color: $primary;
+$navbar-light-active-color: $primary;
+
+// Border Radius
+$border-radius: 0.5rem;
+$border-radius-lg: 1rem;
+$border-radius-xl: 1.5rem;
