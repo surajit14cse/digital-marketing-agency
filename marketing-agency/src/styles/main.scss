@@ -121,6 +121,80 @@ body {
 }
 
 /* =========================================
+   HERO CREATIVE STYLES
+   ========================================= */
+
+// 1. Mesh Gradient Background
+.hero-gradient-mesh {
+    background-color: #ffffff;
+    background-image: 
+        radial-gradient(at 80% 0%, rgba($primary, 0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba($info, 0.1) 0px, transparent 50%),
+        radial-gradient(at 80% 100%, rgba($secondary, 0.05) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, rgba($primary, 0.05) 0px, transparent 50%);
+}
+
+// 2. 3D Perspective Container
+.hero-perspective {
+    perspective: 1500px;
+    transform-style: preserve-3d;
+}
+
+// 3. 3D Card Style (The Dashboard)
+.hero-3d-card {
+    transform: rotateY(-15deg) rotateX(5deg); // Initial isometric-like tilt
+    transition: transform 0.5s ease;
+    transform-style: preserve-3d;
+    box-shadow: -20px 20px 60px rgba(0,0,0,0.1);
+
+    &:hover {
+        transform: rotateY(-5deg) rotateX(0deg) scale(1.02); // Straighten slightly on hover
+        box-shadow: -10px 10px 40px rgba(0,0,0,0.15);
+    }
+}
+
+// 4. Orbit Animation
+@keyframes orbit-cw {
+    from { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+}
+
+@keyframes orbit-ccw {
+    from { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+    to   { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+}
+
+.orbit-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    z-index: 2; // Above the image
+    transform-style: preserve-3d;
+}
+
+.orbit-item {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $primary;
+    font-size: 1.5rem;
+    top: -25px;
+    left: -25px;
+    
+    &.orbit-1 { animation: orbit-cw 12s linear infinite; }
+    &.orbit-2 { animation: orbit-ccw 15s linear infinite; }
+    &.orbit-3 { animation: orbit-cw 18s linear infinite reverse; } // varying speeds
+}
+
+/* =========================================
    ANIMATIONS & KEYFRAMES
    ========================================= */
 
@@ -173,12 +247,74 @@ body {
 }
 
 /* =========================================
-   SERVICE CARD STYLES
+   GLOBAL CARD STYLES (PREMIUM LOOK)
+   ========================================= */
+.card {
+    background-color: #ffffff;
+    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02); // Very soft base shadow
+    position: relative;
+    overflow: hidden; // Contain the gradient blobs
+    z-index: 1; // Ensure content sits above background
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    // Top-Right Subtle Glow
+    &::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba($primary, 0.08) 0%, transparent 70%);
+        z-index: -1;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    // Bottom-Left Subtle Glow
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -100px;
+        left: -100px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba($info, 0.08) 0%, transparent 70%);
+        z-index: -1;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    // Hover Effect for all cards
+    &:hover {
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        
+        &::before {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        &::after {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+    }
+}
+
+/* =========================================
+   SERVICE CARD STYLES (ENHANCED)
    ========================================= */
 .service-card {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(0,0,0,0.05);
-    border-bottom: 4px solid transparent; // Hidden bottom border by default
+    border: 1px solid rgba($primary, 0.1); // Slight tint on border
+    border-bottom: 4px solid transparent; 
+
+    // Enhance the glow for service cards specifically
+    &::before {
+        background: radial-gradient(circle, rgba($primary, 0.12) 0%, transparent 70%);
+    }
 
     .service-icon {
         width: 80px;
@@ -186,11 +322,13 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 1rem; // Rounded square
-        background-color: rgba($primary, 0.1);
+        border-radius: 1rem; 
+        background-color: rgba($primary, 0.05); // Lighter bg to blend with card
         color: $primary;
         transition: all 0.4s ease;
         font-size: 2rem;
+        position: relative;
+        z-index: 2;
     }
 
     .read-more-link {
@@ -208,19 +346,27 @@ body {
     // Hover State
     &:hover {
         transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
-        border-bottom-color: $primary; // Reveal colored bottom border
+        box-shadow: 0 20px 40px rgba($primary, 0.1) !important; // Colored shadow
+        border-bottom-color: $primary; 
 
         .service-icon {
             background-color: $primary;
             color: white;
-            transform: scale(1.1) rotate(3deg); // Subtle pop and tilt
+            transform: scale(1.1) rotate(3deg); 
             box-shadow: 0 10px 20px rgba($primary, 0.3);
         }
 
         .read-more-link {
-            gap: 10px; // Expand gap
+            gap: 10px; 
             i { transform: translateX(5px); }
+        }
+        
+        // Intensify background gradient on hover
+        &::before {
+             transform: translate(-20px, 20px) scale(1.2);
+        }
+        &::after {
+             transform: translate(20px, -20px) scale(1.2);
         }
     }
 }

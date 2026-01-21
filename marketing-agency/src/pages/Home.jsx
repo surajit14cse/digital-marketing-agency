@@ -10,8 +10,7 @@ const Home = () => {
           High impact introduction with value prop and primary CTA.
           Background: Gradient overlay with analytics dashboard image.
           ========================================= */}
-      <section className="hero-section position-relative overflow-hidden">
-        <div className="position-absolute top-0 start-0 w-100 h-100 bg-gradient-primary opacity-10"></div>
+      <section className="hero-section hero-gradient-mesh position-relative overflow-hidden">
         <Container className="position-relative z-1 py-5">
           <Row className="align-items-center min-vh-75 py-5">
             <Col lg={6} className="mb-5 mb-lg-0">
@@ -39,32 +38,74 @@ const Home = () => {
                  <span>Trusted by 500+ Companies</span>
               </div>
             </Col>
-            <Col lg={6}>
-               <div className="position-relative text-center">
-                  {/* Morphing Blob Background */}
-                  <div className="blob-shape"></div>
+            
+            {/* 3D Animated Hero Image Section */}
+            <Col lg={6} className="hero-perspective d-none d-lg-block">
+               <div className="position-relative text-center d-flex justify-content-center align-items-center" style={{height: '500px'}}>
                   
-                  {/* Main Dashboard Image with Float Animation */}
-                  <img 
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                    alt="Analytics Dashboard" 
-                    className="img-fluid rounded-4 shadow-lg border border-5 border-white transform-hover animate-float"
-                  />
-                  
-                  {/* Floating ROI Card with Different Speed/Delay */}
-                  <Card className="position-absolute bottom-0 start-0 m-4 p-3 border-0 shadow-lg rounded-4 d-none d-md-block animate-float" style={{maxWidth: '200px', animationDelay: '1s'}}>
-                     <div className="d-flex align-items-center gap-3">
-                        <div className="bg-success bg-opacity-10 p-2 rounded-circle text-success">
-                            <i className="bi bi-graph-up-arrow fs-4"></i>
-                        </div>
-                        <div>
-                            <p className="mb-0 text-muted small">ROI Increase</p>
-                            <h5 className="mb-0 fw-bold">+150%</h5>
-                        </div>
-                     </div>
-                  </Card>
+                  {/* Morphing Blob Background (Behind 3D elements) */}
+                  <div className="blob-shape" style={{opacity: 0.6}}></div>
+
+                  {/* Main 3D Card Container */}
+                  <div className="hero-3d-card position-relative animate-float">
+                      <img 
+                        src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        alt="Analytics Dashboard" 
+                        className="img-fluid rounded-4 border border-5 border-white"
+                        style={{width: '600px', transformStyle: 'preserve-3d'}}
+                      />
+
+                      {/* Floating Element 1: ROI Card */}
+                      <Card className="position-absolute bottom-0 start-0 m-4 p-3 border-0 shadow-lg rounded-4 text-start" 
+                            style={{maxWidth: '200px', transform: 'translateZ(40px)', left: '-30px'}}>
+                         <div className="d-flex align-items-center gap-3">
+                            <div className="bg-success bg-opacity-10 p-2 rounded-circle text-success">
+                                <i className="bi bi-graph-up-arrow fs-4"></i>
+                            </div>
+                            <div>
+                                <p className="mb-0 text-muted small">ROI Increase</p>
+                                <h5 className="mb-0 fw-bold">+150%</h5>
+                            </div>
+                         </div>
+                      </Card>
+
+                      {/* Floating Element 2: Users Card */}
+                      <Card className="position-absolute top-0 end-0 m-4 p-2 border-0 shadow-lg rounded-pill px-4 py-2" 
+                            style={{transform: 'translateZ(30px)', right: '-20px', top: '40px'}}>
+                          <div className="d-flex align-items-center gap-2">
+                             <div className="d-flex">
+                                {[1,2,3].map(i => <div key={i} className="bg-secondary rounded-circle border border-white" style={{width: '30px', height:'30px', marginLeft: '-10px'}}></div>)}
+                             </div>
+                             <small className="fw-bold ps-1">2k+ Users</small>
+                          </div>
+                      </Card>
+                  </div>
+
+                  {/* Orbiting Icons */}
+                  <div className="orbit-container">
+                      <div className="orbit-item orbit-1" title="SEO">
+                          <i className="bi bi-search"></i>
+                      </div>
+                      <div className="orbit-item orbit-2" title="Analytics">
+                          <i className="bi bi-bar-chart-fill"></i>
+                      </div>
+                      <div className="orbit-item orbit-3" title="Targeting">
+                          <i className="bi bi-bullseye"></i>
+                      </div>
+                  </div>
+
                </div>
             </Col>
+
+            {/* Mobile Fallback (Simple Image) */}
+            <Col lg={6} className="d-lg-none mt-5">
+                <img 
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    alt="Analytics Dashboard" 
+                    className="img-fluid rounded-4 shadow-lg border border-5 border-white"
+                />
+            </Col>
+
           </Row>
         </Container>
       </section>
