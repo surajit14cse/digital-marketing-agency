@@ -1,6 +1,8 @@
 import React from 'react';
-import { Container, Row, Col, Button, Card, Carousel, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card, Carousel, Badge, Accordion } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { portfolioData } from '../data/portfolio';
+import { faqData } from '../data/faq';
 
 const Home = () => {
   return (
@@ -14,16 +16,16 @@ const Home = () => {
         <Container className="position-relative z-1 py-5">
           <Row className="align-items-center min-vh-75 py-5">
             <Col lg={6} className="mb-5 mb-lg-0">
-              <div className="animate-fade-up" style={{animationDelay: '0.1s'}}>
+              <div data-aos="fade-up" data-aos-delay="100">
                   <Badge bg="primary" className="mb-3 px-3 py-2 rounded-pill">Digital Marketing Agency</Badge>
               </div>
-              <h1 className="display-3 fw-bold mb-4 lh-sm animate-fade-up" style={{animationDelay: '0.2s'}}>
+              <h1 className="display-3 fw-bold mb-4 lh-sm" data-aos="fade-up" data-aos-delay="200">
                 Scale Your Brand with <span className="text-primary bg-light px-2 rounded">Precision</span> Marketing
               </h1>
-              <p className="lead text-muted mb-5 animate-fade-up" style={{maxWidth: '500px', animationDelay: '0.3s'}}>
+              <p className="lead text-muted mb-5" style={{maxWidth: '500px'}} data-aos="fade-up" data-aos-delay="300">
                 We blend data-driven strategies with creative storytelling to turn visitors into loyal customers. Stop guessing, start growing.
               </p>
-              <div className="d-flex flex-column flex-sm-row gap-3 animate-fade-up" style={{animationDelay: '0.4s'}}>
+              <div className="d-flex flex-column flex-sm-row gap-3" data-aos="fade-up" data-aos-delay="400">
                 <Button as={Link} to="/contact" variant="primary" size="lg" className="rounded-pill px-5 shadow-sm">
                   Start Growth
                 </Button>
@@ -31,7 +33,7 @@ const Home = () => {
                   View Services
                 </Button>
               </div>
-              <div className="mt-5 d-flex align-items-center gap-3 text-muted small animate-fade-up" style={{animationDelay: '0.5s'}}>
+              <div className="mt-5 d-flex align-items-center gap-3 text-muted small" data-aos="fade-up" data-aos-delay="500">
                  <div className="d-flex">
                     {[1,2,3,4,5].map(i => <i key={i} className="bi bi-star-fill text-warning"></i>)}
                  </div>
@@ -116,8 +118,8 @@ const Home = () => {
           ========================================= */}
       <div className="py-4 bg-white border-bottom">
         <Container>
-            <p className="text-center text-muted small fw-bold text-uppercase ls-2 mb-4">Trusted by industry leaders</p>
-            <Row className="justify-content-center align-items-center opacity-50 grayscale-logos g-5">
+            <p className="text-center text-muted small fw-bold text-uppercase ls-2 mb-4" data-aos="fade-in">Trusted by industry leaders</p>
+            <Row className="justify-content-center align-items-center opacity-50 grayscale-logos g-5" data-aos="fade-up">
                 {['Google', 'Microsoft', 'Spotify', 'Amazon', 'Slack'].map((brand, idx) => (
                     <Col xs={6} md={2} key={idx} className="text-center">
                         <h4 className="fw-bold text-secondary mb-0">{brand}</h4>
@@ -147,7 +149,7 @@ const Home = () => {
               { icon: 'bi-code-slash', title: 'Web Development', desc: 'Digital storefronts. We build blazing fast, pixel-perfect websites designed for conversion.', link: '/services#web' },
               { icon: 'bi-envelope', title: 'Email Marketing', desc: 'Nurture leads. We design automated email flows that turn casual browsers into lifetime buyers.', link: '/services#email' },
             ].map((service, index) => (
-              <Col md={6} lg={4} key={index}>
+              <Col md={6} lg={4} key={index} data-aos="fade-up" data-aos-delay={index * 100}>
                 <Card className="h-100 p-4 border-0 bg-white service-card">
                   <Card.Body className="d-flex flex-column align-items-start">
                     <div className="service-icon mb-4">
@@ -172,8 +174,19 @@ const Home = () => {
           PROCESS SECTION
           Step-by-step breakdown of how the agency works.
           ========================================= */}
-      <section className="py-6">
-          <Container>
+      <section className="py-6 position-relative overflow-hidden">
+          {/* Background Image with Overlay */}
+          <div className="position-absolute top-0 start-0 w-100 h-100 z-0">
+              <img 
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+                alt="Process Background" 
+                className="w-100 h-100 object-fit-cover"
+                style={{ filter: 'brightness(1.1)' }}
+              />
+              <div className="position-absolute top-0 start-0 w-100 h-100 bg-white opacity-90"></div>
+          </div>
+
+          <Container className="position-relative z-1">
             <Row className="align-items-center">
                 <Col lg={5} className="mb-5 mb-lg-0">
                     <h2 className="display-5 fw-bold mb-4">How We Drive Results</h2>
@@ -185,7 +198,7 @@ const Home = () => {
                             { step: '03', title: 'Execution', text: 'Our experts implement the strategy using cutting-edge tools.' },
                             { step: '04', title: 'Optimization', text: 'Continuous monitoring and refining to maximize ROI.' }
                         ].map((item, idx) => (
-                            <div className="d-flex gap-4" key={idx}>
+                            <div className="d-flex gap-4" key={idx} data-aos="fade-left" data-aos-delay={idx * 100}>
                                 <div className="display-6 fw-bold text-primary opacity-25">{item.step}</div>
                                 <div>
                                     <h5 className="fw-bold">{item.title}</h5>
@@ -223,22 +236,18 @@ const Home = () => {
                 <Button as={Link} to="/services" variant="outline-primary" className="rounded-pill d-none d-md-block">View All Work</Button>
             </div>
             <Row className="g-4">
-                {[
-                    { cat: 'SEO & Content', title: 'Organic Traffic Growth', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', result: '+200% Traffic' },
-                    { cat: 'Social Media', title: 'Brand Awareness Campaign', img: 'https://images.unsplash.com/photo-1562577309-4932fdd64cd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', result: '3.5M Impressions' },
-                    { cat: 'PPC', title: 'Lead Generation Funnel', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', result: '-40% CPA' },
-                ].map((item, idx) => (
-                    <Col md={4} key={idx}>
+                {portfolioData.slice(0, 3).map((project, idx) => (
+                    <Col md={4} key={project.id} data-aos="zoom-in" data-aos-delay={idx * 100}>
                         <Card className="border-0 shadow-sm rounded-4 overflow-hidden h-100 group-hover">
                             <div className="overflow-hidden position-relative">
-                                <Card.Img variant="top" src={item.img} className="img-fluid scale-hover transition-all" style={{height: '250px', objectFit: 'cover'}} />
+                                <Card.Img variant="top" src={project.image} className="img-fluid scale-hover transition-all" style={{height: '250px', objectFit: 'cover'}} />
                                 <div className="position-absolute bottom-0 start-0 m-3">
-                                    <Badge bg="white" text="dark" className="shadow-sm">{item.result}</Badge>
+                                    <Badge bg="white" text="dark" className="shadow-sm">{project.category}</Badge>
                                 </div>
                             </div>
                             <Card.Body className="p-4">
-                                <small className="text-primary fw-bold text-uppercase">{item.cat}</small>
-                                <Card.Title className="fw-bold mt-2">{item.title}</Card.Title>
+                                <Card.Title className="fw-bold mt-2">{project.title}</Card.Title>
+                                <Card.Text className="text-muted small text-truncate">{project.description}</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -269,6 +278,34 @@ const Home = () => {
                   </Col>
               ))}
            </Row>
+        </Container>
+      </section>
+
+      {/* =========================================
+          FAQ SECTION
+          Accordion for frequently asked questions.
+          ========================================= */}
+      <section className="py-6 bg-light-alt">
+        <Container>
+            <div className="text-center mb-5 mw-800 mx-auto" data-aos="fade-up">
+                <h6 className="text-primary fw-bold text-uppercase">FAQ</h6>
+                <h2 className="display-5 fw-bold mb-3">Common Questions</h2>
+                <p className="text-muted lead">Everything you need to know about working with us.</p>
+            </div>
+            <Row className="justify-content-center">
+                <Col lg={8}>
+                    <Accordion className="shadow-sm rounded-3 overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                        {faqData.map((faq, index) => (
+                            <Accordion.Item eventKey={index.toString()} key={faq.id} className="border-0 border-bottom">
+                                <Accordion.Header className="fw-bold">{faq.question}</Accordion.Header>
+                                <Accordion.Body className="text-muted">
+                                    {faq.answer}
+                                </Accordion.Body>
+                            </Accordion.Item>
+                        ))}
+                    </Accordion>
+                </Col>
+            </Row>
         </Container>
       </section>
 

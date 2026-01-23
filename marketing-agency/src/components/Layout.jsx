@@ -1,7 +1,8 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Navigation from './Navigation';
 import Footer from './Footer';
-import { Outlet } from 'react-router-dom';
+import Chatbot from './Chatbot';
 
 const Layout = () => {
   return (
@@ -11,6 +12,7 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer />
+      <Chatbot />
     </div>
   );
 };

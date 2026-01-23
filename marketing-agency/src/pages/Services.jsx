@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button, Modal } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
+import { servicesData, pricingData } from '../data/services';
 
 const Services = () => {
-  // Use location hook to access URL hash (e.g., #seo)
   const { hash } = useLocation();
-  // State for Modal visibility
-  const [showModal, setShowModal] = useState(false);
-  // State for storing the service currently being viewed in the modal
-  const [activeService, setActiveService] = useState(null);
 
-  /* =========================================
-     SMOOTH SCROLLING EFFECT
-     Handles scrolling to specific service sections when URL hash changes.
-     Uses a timeout to ensure DOM is ready before scrolling.
-     ========================================= */
+  // Smooth scroll logic
   useEffect(() => {
     if (hash) {
       const element = document.getElementById(hash.replace('#', ''));
@@ -28,170 +20,179 @@ const Services = () => {
     }
   }, [hash]);
 
-  // Handler to open modal with specific service data
-  const handleShow = (service) => {
-      setActiveService(service);
-      setShowModal(true);
-  };
-
-  // Handler to close modal
-  const handleClose = () => setShowModal(false);
-
-  /* =========================================
-     SERVICE DATA
-     Array containing all service offerings with titles, descriptions,
-     icons, and detailed info for the modal.
-     ========================================= */
-  const services = [
-    {
-      id: "seo",
-      title: "Search Engine Optimization (SEO)",
-      desc: "Improve your organic visibility and drive high-quality traffic with our data-driven SEO strategies.",
-      details: "Our SEO services are designed to increase your visibility in search results and deliver high-quality, targeted traffic to your website. We use a combination of technical optimization, content strategy, and authority building to ensure long-term success. From auditing your site for technical issues to researching high-value keywords and creating compelling content, we handle every aspect of your SEO strategy.",
-      features: ["Keyword Research & Strategy", "On-Page & Technical SEO", "Link Building & Outreach", "Local SEO Optimization"],
-      icon: "bi-search"
-    },
-    {
-      id: "ppc",
-      title: "Pay-Per-Click (PPC)",
-      desc: "Instant visibility and targeted reach. We manage your ad spend to maximize ROI.",
-      details: "PPC advertising offers immediate visibility and precise targeting. We manage campaigns across Google Ads, Bing, and social media platforms to ensure you reach your ideal customers at the right time. Our team continuously monitors and optimizes your campaigns to lower your cost-per-acquisition (CPA) and increase your return on ad spend (ROAS).",
-      features: ["Google Ads Management", "Social Media Advertising", "Retargeting Campaigns", "Ad Copywriting & A/B Testing"],
-      icon: "bi-mouse"
-    },
-    {
-      id: "social",
-      title: "Social Media Marketing",
-      desc: "Build a community around your brand. We create engaging content that resonates with your audience.",
-      details: "Social media is more than just posting; it's about building a community and engaging with your audience. We develop comprehensive social media strategies that align with your brand voice and business goals. From content creation and scheduling to community management and influencer partnerships, we help you build a loyal following.",
-      features: ["Strategy Development", "Content Creation & Curation", "Community Management", "Influencer Marketing"],
-      icon: "bi-people"
-    },
-    {
-      id: "content",
-      title: "Content Marketing",
-      desc: "Establish authority and trust with valuable content that educates and converts.",
-      details: "Content is the backbone of any successful digital marketing strategy. We create high-quality, relevant content that attracts, engages, and converts your target audience. Whether it's blog posts, whitepapers, case studies, or videos, our content is designed to establish your brand as an industry authority and drive measurable results.",
-      features: ["Blog Writing & Management", "Whitepapers & E-books", "Video Scripting & Production", "Email Newsletters"],
-      icon: "bi-file-text"
-    },
-     {
-      id: "web",
-      title: "Web Design & Development",
-      desc: "Fast, responsive, and user-friendly websites designed to convert visitors into customers.",
-      details: "Your website is your digital storefront. We design and develop custom websites that are not only visually stunning but also fast, secure, and optimized for conversions. We focus on user experience (UX) to ensure your visitors have a seamless journey from landing page to checkout.",
-      features: ["Custom UI/UX Design", "Responsive & Mobile-First", "E-commerce Solutions", "Website Maintenance"],
-      icon: "bi-laptop"
-    },
-    {
-      id: "email",
-      title: "Email Marketing",
-      desc: "Nurture leads and retain customers with personalized email campaigns.",
-      details: "Email marketing remains one of the most effective channels for ROI. We help you build and segment your email list, create personalized campaigns, and automate your communication flows. From welcome series to abandoned cart recovery, we ensure your message reaches the right inbox at the right time.",
-      features: ["Automated Email Flows", "Newsletter Management", "A/B Testing & Optimization", "List Segmentation"],
-      icon: "bi-envelope-paper"
-    }
-  ];
-
   return (
-    <div className="py-5">
-      <Container>
-        {/* Page Header */}
-        <div className="text-center mb-5">
-          <h1 className="fw-bold display-5">Our Services</h1>
-          <p className="lead text-muted max-w-2xl mx-auto">
-            We offer a full suite of digital marketing services tailored to your business goals.
-          </p>
-        </div>
+    <div className="services-page">
+      
+      {/* =========================================
+          HERO SECTION
+          Colorful gradient background with floating elements.
+          ========================================= */}
+      <section className="position-relative overflow-hidden text-white py-6" style={{ background: 'linear-gradient(135deg, #020024 0%, #090979 35%, #00d4ff 100%)' }}>
+          {/* Dark Overlay for better text contrast */}
+          <div className="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-50"></div>
 
-        {/* Services Grid */}
-        <Row className="g-4">
-          {services.map((service, index) => (
-            <Col lg={4} md={6} key={index} id={service.id} className="scroll-mt">
-              <Card className="h-100 border-0 shadow-sm hover-shadow transition-all">
-                <Card.Body className="p-4 d-flex flex-column">
-                  {/* Service Icon */}
-                  <div className="mb-4">
-                    <i className={`bi ${service.icon} display-5 text-primary`}></i>
-                  </div>
-                  {/* Service Title & Desc */}
-                  <Card.Title className="h4 mb-3 fw-bold">{service.title}</Card.Title>
-                  <Card.Text className="text-muted mb-4 flex-grow-1">
-                    {service.desc}
-                  </Card.Text>
-                  {/* Feature List */}
-                  <ul className="list-unstyled mb-4">
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="mb-2 d-flex align-items-center text-muted">
-                        <i className="bi bi-check-circle-fill text-success me-2 small"></i>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  {/* Action Buttons */}
-                  <div className="mt-auto d-flex gap-2">
-                     <Button variant="outline-primary" className="flex-grow-1 rounded-pill" onClick={() => handleShow(service)}>
-                        Learn More
-                     </Button>
-                     <Button as={Link} to="/contact" variant="primary" className="flex-grow-1 rounded-pill">
-                        Get Started
-                     </Button>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
+          {/* Decorative Circles */}
+          <div className="position-absolute top-0 start-0 translate-middle rounded-circle bg-white opacity-10" style={{width: '400px', height: '400px', filter: 'blur(80px)'}}></div>
+          <div className="position-absolute bottom-0 end-0 translate-middle rounded-circle bg-primary opacity-20" style={{width: '300px', height: '300px', filter: 'blur(60px)'}}></div>
+
+          <Container className="position-relative z-1 text-center">
+              <Badge bg="warning" text="dark" className="mb-3 px-3 py-2 rounded-pill shadow-sm" data-aos="fade-down">What We Do</Badge>
+              <h1 className="display-3 fw-bold mb-4 text-white" data-aos="fade-up" data-aos-delay="100">Digital Mastery, <span className="text-warning">Delivered.</span></h1>
+              <p className="lead text-white-50 mx-auto mb-5" style={{maxWidth: '700px'}} data-aos="fade-up" data-aos-delay="200">
+                  From pixel-perfect designs to data-driven marketing campaigns, we provide the full spectrum of services you need to grow in the digital age.
+              </p>
+              <div data-aos="fade-up" data-aos-delay="300">
+                  <Button as={Link} to="/contact" variant="light" size="lg" className="rounded-pill px-5 text-primary fw-bold shadow-lg hover-up">
+                      Start Your Project
+                  </Button>
+              </div>
+          </Container>
+      </section>
+
+      {/* =========================================
+          DETAILED SERVICE SECTIONS
+          Alternating layout with rich gradients and icons.
+          ========================================= */}
+      <div className="bg-light-alt">
+          {servicesData.map((service, index) => (
+              <section key={service.id} id={service.id} className="py-6 overflow-hidden">
+                  <Container>
+                      <Row className={`align-items-center g-5 ${index % 2 !== 0 ? 'flex-lg-row-reverse' : ''}`}>
+                          
+                          {/* Text Content */}
+                          <Col lg={6} data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}>
+                              <div className={`d-inline-flex align-items-center justify-content-center mb-4 rounded-3 text-white shadow-sm`} 
+                                   style={{ width: '60px', height: '60px', background: service.gradient }}>
+                                  <i className={`bi ${service.icon} fs-3`}></i>
+                              </div>
+                              <h2 className="fw-bold display-5 mb-2">{service.title}</h2>
+                              <p className={`h5 fw-medium mb-4 text-${service.color}`}>{service.subtitle}</p>
+                              <p className="text-muted lead mb-4">{service.desc}</p>
+                              
+                              <ul className="list-unstyled mb-4">
+                                  {service.details.map((detail, i) => (
+                                      <li key={i} className="mb-3 d-flex align-items-start">
+                                          <i className={`bi bi-check-circle-fill text-${service.color} me-3 mt-1`}></i>
+                                          <span className="text-muted">{detail}</span>
+                                      </li>
+                                  ))}
+                              </ul>
+                              
+                              <Button as={Link} to="/contact" variant={`outline-${service.color}`} className="rounded-pill px-4">
+                                  Learn More
+                              </Button>
+                          </Col>
+
+                          {/* Visual/Card Content */}
+                          <Col lg={6} data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}>
+                              <div className="position-relative">
+                                  {/* Background Blob */}
+                                  <div className="position-absolute top-50 start-50 translate-middle w-100 h-100 rounded-circle opacity-10" 
+                                       style={{ background: service.gradient, filter: 'blur(60px)', transform: 'scale(0.8)' }}></div>
+                                  
+                                  {/* Glass Card */}
+                                  <Card className="border-0 shadow-lg bg-white bg-opacity-75 backdrop-blur rounded-4 p-4 position-relative z-1">
+                                      <div className="d-flex align-items-center justify-content-between mb-4 border-bottom pb-3">
+                                          <span className="fw-bold text-muted small text-uppercase ls-1">Project Impact</span>
+                                          <Badge bg={service.color} pill>Top Rated</Badge>
+                                      </div>
+                                      <Row className="text-center g-3">
+                                          <Col xs={4}>
+                                              <h3 className={`fw-bold text-${service.color} mb-0`}>+150%</h3>
+                                              <small className="text-muted">Traffic</small>
+                                          </Col>
+                                          <Col xs={4} className="border-start border-end">
+                                               <h3 className={`fw-bold text-${service.color} mb-0`}>3x</h3>
+                                              <small className="text-muted">Leads</small>
+                                          </Col>
+                                          <Col xs={4}>
+                                               <h3 className={`fw-bold text-${service.color} mb-0`}>-40%</h3>
+                                              <small className="text-muted">Cost</small>
+                                          </Col>
+                                      </Row>
+                                      <div className="mt-4 pt-3 border-top">
+                                          <p className="small text-muted mb-0 fst-italic">
+                                              "TrustMart's {service.title} strategy completely transformed our business metrics within 90 days."
+                                          </p>
+                                      </div>
+                                  </Card>
+                              </div>
+                          </Col>
+                      </Row>
+                  </Container>
+              </section>
           ))}
-        </Row>
-        
-        {/* Bottom CTA */}
-        <div className="mt-5 text-center bg-light p-5 rounded-4">
-            <h3 className="fw-bold mb-3">Not sure what you need?</h3>
-            <p className="text-muted mb-4">Book a free strategy call and let us help you identify the best growth opportunities.</p>
-            <Button as={Link} to="/contact" variant="primary" size="lg" className="rounded-pill px-5">Book Consultation</Button>
-        </div>
+      </div>
 
-        {/* =========================================
-            SERVICE DETAILS MODAL
-            Popup displaying extended information about the selected service.
-            ========================================= */}
-        <Modal show={showModal} onHide={handleClose} size="lg" centered>
-            {activeService && (
-                <>
-                    <Modal.Header closeButton className="border-0 pb-0">
-                    </Modal.Header>
-                    <Modal.Body className="px-5 pb-5">
-                        <div className="text-center mb-4">
-                            <i className={`bi ${activeService.icon} display-4 text-primary mb-3 d-block`}></i>
-                            <h2 className="fw-bold">{activeService.title}</h2>
-                        </div>
-                        <p className="text-muted lead mb-4">{activeService.desc}</p>
-                        <hr className="my-4 opacity-25" />
-                        <h5 className="fw-bold mb-3">What We Offer</h5>
-                        <p className="text-muted mb-4">{activeService.details}</p>
-                        <Row>
-                            {activeService.features.map((feature, i) => (
-                                <Col md={6} key={i} className="mb-2">
-                                    <div className="d-flex align-items-center">
-                                        <i className="bi bi-check-circle-fill text-success me-2"></i>
-                                        <span>{feature}</span>
-                                    </div>
-                                </Col>
-                            ))}
-                        </Row>
-                    </Modal.Body>
-                    <Modal.Footer className="border-0 justify-content-center pb-5">
-                        <Button variant="secondary" onClick={handleClose} className="rounded-pill px-4">
-                            Close
-                        </Button>
-                        <Button as={Link} to="/contact" variant="primary" className="rounded-pill px-4" onClick={handleClose}>
-                            Get Started
-                        </Button>
-                    </Modal.Footer>
-                </>
-            )}
-        </Modal>
+      {/* =========================================
+          PRICING SECTION
+          Clean pricing tables with 'Recommended' highlight.
+          ========================================= */}
+      <section className="py-6 bg-white">
+          <Container>
+              <div className="text-center mb-5 mw-800 mx-auto" data-aos="fade-up">
+                  <h6 className="text-primary fw-bold text-uppercase">Pricing</h6>
+                  <h2 className="display-5 fw-bold mb-3">Transparent Investment</h2>
+                  <p className="text-muted lead">Choose the package that fits your growth stage. No hidden fees.</p>
+              </div>
 
-      </Container>
+              <Row className="justify-content-center align-items-center g-4">
+                  {pricingData.map((plan, idx) => (
+                      <Col md={6} lg={4} key={idx} data-aos="flip-left" data-aos-delay={idx * 100}>
+                          <Card className={`h-100 border-0 rounded-4 text-center overflow-hidden transition-hover ${plan.highlight ? 'shadow-lg scale-hover transform-hover' : 'shadow-sm'}`} 
+                                style={plan.highlight ? { transform: 'scale(1.05)', zIndex: 2 } : {}}>
+                              
+                              {plan.highlight && <div className="bg-primary text-white py-1 small fw-bold text-uppercase ls-1">Most Popular</div>}
+                              
+                              <Card.Body className="p-5 d-flex flex-column">
+                                  <h5 className="fw-bold text-muted text-uppercase mb-3">{plan.tier}</h5>
+                                  <div className="mb-3">
+                                      <span className="display-4 fw-bold text-dark">{plan.price}</span>
+                                      <span className="text-muted">{plan.period}</span>
+                                  </div>
+                                  <p className="text-muted small mb-4">{plan.desc}</p>
+                                  
+                                  <div className="flex-grow-1 mb-4">
+                                      <ul className="list-unstyled">
+                                          {plan.features.map((feature, i) => (
+                                              <li key={i} className="mb-3 d-flex align-items-center justify-content-center small text-muted">
+                                                  <i className="bi bi-check2 text-primary me-2 fs-5"></i>
+                                                  {feature}
+                                              </li>
+                                          ))}
+                                      </ul>
+                                  </div>
+
+                                  <Button 
+                                    as={Link} 
+                                    to="/contact" 
+                                    variant={plan.highlight ? "primary" : "outline-dark"} 
+                                    className="rounded-pill w-100 py-2 fw-bold"
+                                  >
+                                      Get Started
+                                  </Button>
+                              </Card.Body>
+                          </Card>
+                      </Col>
+                  ))}
+              </Row>
+          </Container>
+      </section>
+
+      {/* =========================================
+          FINAL CTA
+          Colorful gradient strip.
+          ========================================= */}
+      <section className="py-6 text-white text-center" style={{ background: 'linear-gradient(45deg, #11998e 0%, #38ef7d 100%)' }}>
+          <Container data-aos="zoom-in">
+              <h2 className="fw-bold display-5 mb-4">Ready to Scale?</h2>
+              <p className="lead mb-5 opacity-90">Let's build something amazing together.</p>
+              <Button as={Link} to="/contact" variant="light" size="lg" className="rounded-pill px-5 text-success fw-bold shadow">
+                  Book Your Free Consultation
+              </Button>
+          </Container>
+      </section>
+
     </div>
   );
 };

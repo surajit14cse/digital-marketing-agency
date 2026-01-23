@@ -1,55 +1,194 @@
 import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import CountUp from 'react-countup';
+import { teamData } from '../data/team';
 
 const About = () => {
   return (
-    <div className="py-5">
-      <Container>
-        <Row className="align-items-center mb-5">
-            <Col lg={6}>
-                <h1 className="fw-bold display-5 mb-4">About TrustMart</h1>
-                <p className="lead text-muted mb-4">
-                    Founded in 2020, TrustMart Digital Agency was born from a simple belief: 
-                    <strong> Data beats opinion.</strong>
-                </p>
-                <p className="text-muted">
-                    We started as a small team of SEO specialists and have grown into a full-service digital marketing agency. 
-                    Our mission is to empower businesses with transparent, results-oriented marketing strategies that deliver measurable growth. 
-                    We don't just execute campaigns; we build partnerships.
-                </p>
-            </Col>
-            <Col lg={6} className="mt-4 mt-lg-0">
-                <img 
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                    alt="Team working together" 
-                    className="img-fluid rounded-4 shadow"
-                />
-            </Col>
-        </Row>
+    <>
+      {/* =========================================
+          HEADER SECTION
+          Agency story and vision.
+          ========================================= */}
+      <section className="py-6 overflow-hidden">
+          <Container>
+            <Row className="align-items-center mb-5">
+                <Col lg={6} className="mb-5 mb-lg-0">
+                    <Badge bg="primary" className="mb-3 px-3 py-2 rounded-pill">Our Story</Badge>
+                    <h1 className="fw-bold display-4 mb-4">We are more than just a digital agency.</h1>
+                    <p className="lead text-muted mb-4">
+                        Founded in 2020, TrustMart Digital Agency was born from a simple belief: 
+                        <strong> Data beats opinion.</strong>
+                    </p>
+                    <p className="text-muted mb-4">
+                        We started as a small team of SEO specialists and have grown into a full-service digital marketing partner. 
+                        Our mission is to empower businesses with transparent, results-oriented marketing strategies that deliver measurable growth. 
+                        We don't just execute campaigns; we build partnerships that last.
+                    </p>
+                    <div className="d-flex gap-3">
+                         <Button as={Link} to="/contact" variant="primary" className="rounded-pill px-4">Let's Talk</Button>
+                         <Button as={Link} to="/portfolio" variant="outline-dark" className="rounded-pill px-4">View Our Work</Button>
+                    </div>
+                </Col>
+                <Col lg={6}>
+                    <div className="position-relative ps-lg-5">
+                         <div className="bg-warning position-absolute top-0 end-0 w-75 h-75 rounded-4 opacity-10 translate-middle-x mt-n4 me-n4"></div>
+                         <img 
+                            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                            alt="Team working together" 
+                            className="img-fluid rounded-4 shadow-lg position-relative z-1"
+                        />
+                    </div>
+                </Col>
+            </Row>
+          </Container>
+      </section>
 
-        <div className="mb-5">
-            <h2 className="text-center fw-bold mb-5">Meet The Team</h2>
-            <Row className="g-4">
-                {[
-                    { name: "Sarah Johnson", role: "CEO & Founder", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
-                    { name: "Michael Chen", role: "Head of SEO", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
-                    { name: "Jessica Williams", role: "Creative Director", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
-                    { name: "David Miller", role: "Lead Developer", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" }
-                ].map((member, idx) => (
-                    <Col md={3} sm={6} key={idx}>
-                        <Card className="border-0 shadow-sm text-center h-100">
-                            <Card.Img variant="top" src={member.img} className="object-fit-cover" style={{height: '250px'}} />
-                            <Card.Body>
-                                <Card.Title className="fw-bold">{member.name}</Card.Title>
-                                <Card.Text className="text-muted small">{member.role}</Card.Text>
-                            </Card.Body>
-                        </Card>
+      {/* =========================================
+          CORE VALUES SECTION
+          Three column grid with icons.
+          ========================================= */}
+      <section className="py-6 bg-light-alt">
+         <Container>
+             <div className="text-center mb-5 mw-800 mx-auto">
+                <h6 className="text-primary fw-bold text-uppercase">Our DNA</h6>
+                <h2 className="display-5 fw-bold">Values That Drive Us</h2>
+             </div>
+             <Row className="g-4">
+                 {[
+                     { icon: "bi-graph-up-arrow", title: "Data-Driven", desc: "We don't guess. Every decision is backed by analytics and real-world performance metrics." },
+                     { icon: "bi-people-fill", title: "Client-Centric", desc: "Your goals are our goals. We view ourselves as an extension of your internal team." },
+                     { icon: "bi-lightbulb-fill", title: "Constant Innovation", desc: "The digital landscape never stops evolving, and neither do we. We stay ahead of the curve." }
+                 ].map((value, idx) => (
+                     <Col md={4} key={idx}>
+                         <Card className="h-100 border-0 shadow-sm p-4 text-center hover-y-shift transition-all">
+                             <div className="mx-auto mb-4 bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style={{width: '80px', height: '80px'}}>
+                                 <i className={`bi ${value.icon} fs-2 text-primary`}></i>
+                             </div>
+                             <Card.Title className="fw-bold h4">{value.title}</Card.Title>
+                             <Card.Text className="text-muted">{value.desc}</Card.Text>
+                         </Card>
+                     </Col>
+                 ))}
+             </Row>
+         </Container>
+      </section>
+
+      {/* =========================================
+          STATS / TIMELINE STRIP
+          Key achievements bar.
+          ========================================= */}
+      <section className="py-5 bg-dark text-white">
+          <Container>
+              <Row className="text-center gy-4 justify-content-center">
+                   <Col xs={6} md={3} className="border-end border-secondary border-opacity-25">
+                       <div className="display-6 fw-bold text-primary mb-0">
+                           <CountUp end={2020} duration={2.5} enableScrollSpy scrollSpyOnce />
+                       </div>
+                       <small className="text-uppercase ls-1 opacity-75">Year Founded</small>
+                   </Col>
+                   <Col xs={6} md={3} className="border-end border-secondary border-opacity-25">
+                       <div className="display-6 fw-bold text-primary mb-0">
+                           <CountUp end={50} duration={2.5} suffix="+" enableScrollSpy scrollSpyOnce />
+                       </div>
+                       <small className="text-uppercase ls-1 opacity-75">Team Members</small>
+                   </Col>
+                   <Col xs={6} md={3} className="border-end border-secondary border-opacity-25">
+                       <div className="display-6 fw-bold text-primary mb-0">
+                           <CountUp end={350} duration={2.5} suffix="+" enableScrollSpy scrollSpyOnce />
+                       </div>
+                       <small className="text-uppercase ls-1 opacity-75">Projects Launched</small>
+                   </Col>
+                   <Col xs={6} md={3}>
+                       <div className="display-6 fw-bold text-primary mb-0">
+                           <CountUp end={15} duration={2.5} enableScrollSpy scrollSpyOnce />
+                       </div>
+                       <small className="text-uppercase ls-1 opacity-75">Industry Awards</small>
+                   </Col>
+              </Row>
+          </Container>
+      </section>
+
+      {/* =========================================
+          TEAM SECTION
+          Dynamic team grid from data file.
+          ========================================= */}
+      <section className="py-6 bg-white position-relative overflow-hidden">
+        {/* Background Decoration */}
+        <div className="position-absolute top-0 end-0 translate-middle rounded-circle bg-light opacity-50" style={{width: '600px', height: '600px', zIndex: 0}}></div>
+
+        <Container className="position-relative z-1">
+            <div className="text-center mb-6" data-aos="fade-up">
+                <Badge bg="primary" bg-opacity="10" text="primary" className="mb-3 px-3 py-2 rounded-pill bg-opacity-10">The Squad</Badge>
+                <h2 className="display-4 fw-bold mb-3">Meet The Experts</h2>
+                <p className="text-muted lead mx-auto" style={{maxWidth: '600px'}}>
+                    The creative minds and data wizards behind our clients' success.
+                </p>
+            </div>
+            
+            <Row className="g-5 justify-content-center">
+                {teamData.map((member, idx) => (
+                    <Col md={6} lg={3} key={member.id} data-aos="fade-up" data-aos-delay={idx * 100}>
+                        <div className="team-member group-hover text-center">
+                            
+                            {/* Image Container with Gradient Border Effect */}
+                            <div className="position-relative d-inline-block mb-4">
+                                <div className="position-absolute top-0 start-0 w-100 h-100 rounded-pill bg-gradient-primary opacity-0 group-hover-opacity-100 transition-all duration-500" 
+                                     style={{ transform: 'scale(1.05)', zIndex: 0 }}></div>
+                                
+                                <div className="image-wrapper rounded-pill overflow-hidden position-relative shadow-lg z-1" style={{width: '260px', height: '320px'}}>
+                                    <img 
+                                        src={member.image} 
+                                        alt={member.name}
+                                        className="w-100 h-100 object-fit-cover scale-hover transition-all duration-500" 
+                                    />
+                                    
+                                    {/* Socials Overlay (Slide Up) */}
+                                    <div className="position-absolute bottom-0 start-0 w-100 p-3 bg-white bg-opacity-90 backdrop-blur transform-translate-y-100 group-hover-slide-up transition-all duration-300">
+                                        <div className="d-flex justify-content-center gap-3">
+                                            <a href={member.socials.linkedin} className="text-dark hover-primary transition-all"><i className="bi bi-linkedin fs-5"></i></a>
+                                            <a href={member.socials.twitter} className="text-dark hover-primary transition-all"><i className="bi bi-twitter-x fs-5"></i></a>
+                                            <a href="#" className="text-dark hover-primary transition-all"><i className="bi bi-envelope-fill fs-5"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Text Content */}
+                            <div>
+                                <h4 className="fw-bold mb-1">{member.name}</h4>
+                                <p className="text-primary fw-bold small text-uppercase ls-1 mb-3">{member.role}</p>
+                                <p className="text-muted small mx-auto opacity-75" style={{maxWidth: '250px'}}>
+                                    {member.bio}
+                                </p>
+                            </div>
+                        </div>
                     </Col>
                 ))}
             </Row>
-        </div>
-      </Container>
-    </div>
+        </Container>
+      </section>
+
+      {/* =========================================
+          CAREERS CTA
+          Invitation to join the team.
+          ========================================= */}
+      <section className="py-6 bg-primary text-white text-center">
+          <Container>
+              <div className="mx-auto mw-800">
+                  <h2 className="display-5 fw-bold mb-4">Love What We Do? Join Us!</h2>
+                  <p className="lead opacity-90 mb-5">
+                      We are always looking for talented individuals to join our growing team. 
+                      If you are passionate about digital marketing, we want to hear from you.
+                  </p>
+                  <Button as={Link} to="/contact" variant="light" size="lg" className="rounded-pill px-5 text-primary fw-bold shadow-sm">
+                      View Open Positions
+                  </Button>
+              </div>
+          </Container>
+      </section>
+    </>
   );
 };
 

@@ -39,6 +39,17 @@ body {
 // Scroll margin for fixed navbar compensation
 .scroll-mt { scroll-margin-top: 100px; }
 
+// Object fit utility
+.object-fit-cover { object-fit: cover; }
+
+// Line clamp utility
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 /* =========================================
    BACKGROUND STYLES
    ========================================= */
@@ -52,12 +63,26 @@ body {
     background-color: #f1f5f9; // Slate 100 - Stronger contrast against white
 }
 
+// Glassmorphism background
+.backdrop-blur {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
 /* =========================================
    HOVER EFFECTS & ANIMATIONS
    ========================================= */
 // Force white text color on hover (useful for links in dark footers)
 .hover-white:hover {
     color: white !important;
+}
+
+// Force primary color on hover
+.hover-primary {
+    transition: color 0.3s ease;
+    &:hover {
+        color: $primary !important;
+    }
 }
 
 // Add shadow on hover without movement
@@ -94,6 +119,51 @@ body {
 .group-hover:hover .scale-hover {
     transform: scale(1.1);
 }
+
+// Group Hover Visibility Logic
+.group-hover-visible {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.group-hover:hover .group-hover-visible {
+    opacity: 1 !important;
+}
+
+// Group Hover Opacity Logic
+.group-hover-opacity-100 {
+    transition: opacity 0.5s ease;
+}
+
+.group-hover:hover .group-hover-opacity-100 {
+    opacity: 1 !important;
+}
+
+// Group Hover Slide Up Animation
+.group-hover-slide-up {
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); // Smooth cubic bezier
+}
+
+.group-hover:hover .group-hover-slide-up {
+    transform: translateY(0);
+}
+
+// Group Hover Translate X (Arrow movement)
+.group-hover-translate-x {
+    transition: transform 0.3s ease;
+}
+
+.group-hover:hover .group-hover-translate-x {
+    transform: translateX(5px);
+}
+
+// Transition helpers
+.transition-all { transition: all 0.3s ease; }
+.duration-500 { transition-duration: 0.5s; }
+.delay-100 { transition-delay: 0.1s; }
+.transform-translate-y-100 { transform: translateY(100%); }
+
 
 // Animated icon link (arrow moves right on hover)
 .icon-link {
