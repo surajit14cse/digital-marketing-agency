@@ -16,7 +16,7 @@ const Footer = () => {
           <Col lg={4} md={12} className="mb-4 mb-lg-0">
             <h5 className="mb-3 d-flex align-items-center gap-2">
                 <i className="bi bi-graph-up-arrow text-primary"></i>
-                <span className="fw-bold">TrustMart</span>
+                <span className="text-primary">TrustMart</span>
             </h5>
             <p className="text-white-50 small mb-4 pe-lg-5">
               Empowering businesses to scale through data-driven digital marketing strategies. We turn clicks into loyal customers and complex data into clear growth.
@@ -99,7 +99,7 @@ const Footer = () => {
                 </p>
             </div>
             <div className="col-md-6 text-center text-md-end mt-2 mt-md-0">
-                 <p className="text-white-50 small mb-0">Designed with <i className="bi bi-heart-fill text-danger mx-1"></i> by TrustMart Team</p>
+                 <p className="text-white-50 small mb-0">Designed with <i className="bi bi-heart-fill text-danger mx-1"></i> by Techvelly Team</p>
             </div>
         </div>
       </Container>

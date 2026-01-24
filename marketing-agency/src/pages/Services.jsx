@@ -27,7 +27,7 @@ const Services = () => {
           HERO SECTION
           Colorful gradient background with floating elements.
           ========================================= */}
-      <section className="position-relative overflow-hidden text-white py-6" style={{ background: 'linear-gradient(135deg, #020024 0%, #090979 35%, #00d4ff 100%)' }}>
+      <section className="position-relative overflow-hidden text-white d-flex align-items-center" style={{ background: 'linear-gradient(135deg, #020024 0%, #090979 35%, #00d4ff 100%)', padding: '10rem 0' }}>
           {/* Dark Overlay for better text contrast */}
           <div className="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-50"></div>
 

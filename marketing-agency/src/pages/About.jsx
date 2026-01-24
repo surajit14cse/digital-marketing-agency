@@ -3,6 +3,10 @@ import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CountUp from 'react-countup';
 import { teamData } from '../data/team';
+import { historyData, cultureImages } from '../data/about-extras';
+
+// Import Local Images
+import heroImg from '../assets/images/about/hero.jpg';
 
 const About = () => {
   return (
@@ -11,7 +15,7 @@ const About = () => {
           HEADER SECTION
           Agency story and vision.
           ========================================= */}
-      <section className="py-6 overflow-hidden">
+      <section className="overflow-hidden" style={{ padding: '10rem 0 5rem 0' }}>
           <Container>
             <Row className="align-items-center mb-5">
                 <Col lg={6} className="mb-5 mb-lg-0">
@@ -35,7 +39,7 @@ const About = () => {
                     <div className="position-relative ps-lg-5">
                          <div className="bg-warning position-absolute top-0 end-0 w-75 h-75 rounded-4 opacity-10 translate-middle-x mt-n4 me-n4"></div>
                          <img 
-                            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                            src={heroImg} 
                             alt="Team working together" 
                             className="img-fluid rounded-4 shadow-lg position-relative z-1"
                         />
@@ -73,6 +77,40 @@ const About = () => {
                  ))}
              </Row>
          </Container>
+      </section>
+
+      {/* =========================================
+          TIMELINE SECTION (NEW)
+          Vertical journey of the company.
+          ========================================= */}
+      <section className="py-6 overflow-hidden">
+          <Container>
+              <div className="text-center mb-6">
+                  <Badge bg="info" bg-opacity="10" text="white" className="mb-3 px-3 py-2 rounded-pill border border-info border-opacity-25">Our Journey</Badge>
+                  <h2 className="display-5 fw-bold mb-3">From Start-up to Scale-up</h2>
+                  <p className="text-muted lead mx-auto" style={{maxWidth: '600px'}}>
+                      Every milestone represents a step forward in our commitment to excellence.
+                  </p>
+              </div>
+
+              <div className="timeline-section py-4">
+                  {historyData.map((item, idx) => (
+                      <div className="timeline-item" key={idx} data-aos="fade-up">
+                          {/* Central Dot */}
+                          <div className="timeline-dot shadow-sm">
+                              <i className={`bi ${item.icon} fs-5`}></i>
+                          </div>
+                          
+                          {/* Content Box */}
+                          <div className="timeline-content text-start">
+                              <span className="display-6 fw-bold text-primary opacity-25 mb-2 d-block">{item.year}</span>
+                              <h4 className="fw-bold mb-3">{item.title}</h4>
+                              <p className="text-muted mb-0">{item.description}</p>
+                          </div>
+                      </div>
+                  ))}
+              </div>
+          </Container>
       </section>
 
       {/* =========================================
@@ -168,6 +206,39 @@ const About = () => {
                 ))}
             </Row>
         </Container>
+      </section>
+
+      {/* =========================================
+          CULTURE / LIFE AT COMPANY (NEW)
+          Photo gallery.
+          ========================================= */}
+      <section className="py-6 bg-light-alt">
+          <Container>
+              <Row className="align-items-center mb-5">
+                  <Col lg={6}>
+                      <h2 className="display-5 fw-bold mb-3">Life at TrustMart</h2>
+                      <p className="text-muted lead">
+                          We work hard, but we also know how to have fun. Our culture is built on collaboration, continuous learning, and plenty of coffee.
+                      </p>
+                  </Col>
+                  <Col lg={6} className="text-lg-end">
+                      <Button as={Link} to="/contact" variant="outline-primary" className="rounded-pill px-4">Join Our Team</Button>
+                  </Col>
+              </Row>
+
+              <Row className="g-4">
+                  {cultureImages.map((img, idx) => (
+                      <Col md={6} lg={3} key={idx} data-aos="zoom-in" data-aos-delay={idx * 100}>
+                          <div className="culture-card shadow-sm cursor-pointer group-hover">
+                              <img src={img} alt="Office culture" className="img-fluid" />
+                              <div className="overlay">
+                                  <p className="text-white fw-bold mb-0">Team Collaboration</p>
+                              </div>
+                          </div>
+                      </Col>
+                  ))}
+              </Row>
+          </Container>
       </section>
 
       {/* =========================================

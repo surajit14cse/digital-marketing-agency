@@ -25,7 +25,7 @@ const Portfolio = () => {
           HERO SECTION
           Dark gradient background with Portfolio highlights.
           ========================================= */}
-      <section className="position-relative overflow-hidden text-white py-6" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+      <section className="position-relative overflow-hidden text-white d-flex align-items-center" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', padding: '10rem 0' }}>
           <div className="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-10"></div>
           {/* Decorative Elements */}
           <div className="position-absolute top-50 start-0 translate-middle rounded-circle bg-white opacity-10" style={{width: '300px', height: '300px', filter: 'blur(80px)'}}></div>

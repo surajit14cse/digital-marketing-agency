@@ -1,10 +1,15 @@
+import team1 from '../assets/images/team/team-1.jpg';
+import team2 from '../assets/images/team/team-2.jpg';
+import team3 from '../assets/images/team/team-3.jpg';
+import team4 from '../assets/images/team/team-4.jpg';
+
 export const teamData = [
     {
       id: 1,
       name: "Sarah Johnson",
       role: "CEO & Founder",
       bio: "Former Google executive with 15 years of digital marketing experience. Sarah leads the vision and strategy for TrustMart.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      image: team1,
       socials: { linkedin: "#", twitter: "#" }
     },
     {
@@ -12,7 +17,7 @@ export const teamData = [
       name: "Michael Chen",
       role: "Head of SEO",
       bio: "SEO wizard who has helped over 100 businesses rank #1. Michael stays ahead of every algorithm update.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      image: team2,
       socials: { linkedin: "#", twitter: "#" }
     },
     {
@@ -20,7 +25,7 @@ export const teamData = [
       name: "Jessica Williams",
       role: "Creative Director",
       bio: "Award-winning designer with a passion for brand storytelling. Jessica turns complex ideas into beautiful visuals.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      image: team3,
       socials: { linkedin: "#", twitter: "#" }
     },
     {
@@ -28,7 +33,7 @@ export const teamData = [
       name: "David Miller",
       role: "Lead Developer",
       bio: "Full-stack expert specializing in high-performance React applications. David ensures technical excellence.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      image: team4,
       socials: { linkedin: "#", github: "#" }
     }
   ];
